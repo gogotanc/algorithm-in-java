@@ -2,6 +2,7 @@ package org.tanc.algorithm.list;
 
 import org.junit.Test;
 import org.tanc.algorithm.list.impl.ArrayListImpl;
+import org.tanc.algorithm.list.impl.LinkListImpl;
 
 import static org.junit.Assert.*;
 
@@ -47,5 +48,21 @@ public class ListTest {
         list.add(4);
         // list 中数组实际长度为 8
         assertEquals(5, list.size());
+    }
+
+    @Test
+    public void linkList() {
+        BaseList<Integer> list = new LinkListImpl<>();
+        list.add(0);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.remove(1);
+        list.remove(1);
+        assertEquals(2, list.size());
+        assertEquals(0, list.get(1).intValue());
+        list.set(1, 1);
+        list.set(1, 2);
+        assertEquals(1, list.get(2).intValue());
     }
 }
