@@ -4,6 +4,7 @@ import org.tanc.algorithm.list.BaseList;
 
 /**
  * 数组实现表
+ * Created by tanc on 2017/2/8.
  */
 public class ArrayListImpl<E> implements BaseList<E> {
 

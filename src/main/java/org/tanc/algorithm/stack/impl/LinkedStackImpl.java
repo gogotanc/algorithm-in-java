@@ -5,6 +5,7 @@ import org.tanc.algorithm.stack.BaseStack;
 
 /**
  * 单链表实现栈（带头节点的单链表）
+ * Created by tanc on 2017/2/9.
  */
 public class LinkedStackImpl<E> implements BaseStack<E> {
 

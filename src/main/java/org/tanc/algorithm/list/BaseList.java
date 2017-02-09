@@ -2,6 +2,7 @@ package org.tanc.algorithm.list;
 
 /**
  * 表
+ * Created by tanc on 2017/2/9.
  */
 public interface BaseList<E> {
 

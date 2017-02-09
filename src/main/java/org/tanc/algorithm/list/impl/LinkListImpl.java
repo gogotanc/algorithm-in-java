@@ -4,6 +4,7 @@ import org.tanc.algorithm.list.BaseList;
 
 /**
  * 使用 带头节点单向链表 实现表
+ * Created by tanc on 2017/2/8.
  */
 public class LinkListImpl<E> implements BaseList<E> {
 
