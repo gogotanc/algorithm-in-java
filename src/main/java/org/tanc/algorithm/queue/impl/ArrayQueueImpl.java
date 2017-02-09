@@ -10,6 +10,8 @@ public class ArrayQueueImpl<E> implements BaseQueue<E> {
 
     private static final int INIT_SIZE = 24;
 
+    // todo fix sth to perfect
+
     private Object[] objects;
     private int head;
     private int tail;
