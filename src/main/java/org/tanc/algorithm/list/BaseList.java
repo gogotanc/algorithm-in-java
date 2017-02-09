@@ -1,7 +1,7 @@
 package org.tanc.algorithm.list;
 
 /**
- * 自定义列表接口
+ * 表
  */
 public interface BaseList<E> {
 
