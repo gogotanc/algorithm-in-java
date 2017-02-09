@@ -1,6 +1,7 @@
 package org.tanc.algorithm.queue;
 
 import org.junit.Test;
+import org.tanc.algorithm.queue.impl.ArrayQueueImpl;
 import org.tanc.algorithm.queue.impl.LinkedQueueImpl;
 
 import static org.junit.Assert.*;
@@ -14,6 +15,16 @@ public class BaseQueueTest {
     @Test
     public void linkedQueue() throws Exception {
         BaseQueue<Integer> queue = new LinkedQueueImpl<>();
+        testCase(queue);
+    }
+
+    @Test
+    public void arrayQueue() throws Exception {
+        BaseQueue<Integer> queue = new ArrayQueueImpl<>();
+        testCase(queue);
+    }
+
+    private void testCase(BaseQueue<Integer> queue) {
         queue.push(1);
         queue.push(2);
         queue.push(3);
@@ -24,5 +35,4 @@ public class BaseQueueTest {
         assertEquals(3, queue.pop().intValue());
         assertEquals(1, queue.size());
     }
-
 }
