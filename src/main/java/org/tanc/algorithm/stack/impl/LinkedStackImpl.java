@@ -1,5 +1,6 @@
 package org.tanc.algorithm.stack.impl;
 
+import org.tanc.algorithm.exception.IllegalOperationException;
 import org.tanc.algorithm.stack.BaseStack;
 
 /**
@@ -34,7 +35,7 @@ public class LinkedStackImpl<E> implements BaseStack<E> {
     @Override
     public E pop() {
         if (size == 0) {
-            return null;
+            throw new IllegalOperationException("栈中没有数据。");
         }
         size--;
         Node<E> top = head.next;
