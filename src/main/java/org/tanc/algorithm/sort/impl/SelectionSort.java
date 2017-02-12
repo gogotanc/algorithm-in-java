@@ -9,20 +9,22 @@ import org.tanc.algorithm.sort.BaseSortAlgorithm;
 public class SelectionSort<E extends Comparable<? super E>> implements BaseSortAlgorithm<E> {
 
     @Override
-    public E[] sort(E[] array) {
+    public E[] sort(E[] a) {
 
-        int j;
+        int i, j, min;
+        int len = a.length;
 
-        for (int i = 0; i < array.length; i++) {
-            E min = array[i];
-            for (j = i; j < array.length; j++) {
-                if (min.compareTo(array[j]) > 0) {
-                    min = array[j];
+        for (i = 0; i < len; i++) {
+            min = i;
+            for (j = i; j < len; j++) {
+                if (a[min].compareTo(a[j]) > 0) {
+                    min = j;
                 }
             }
-            array[j] = array[i];
-            array[i] = min;
+            E temp = a[min];
+            a[min] = a[i];
+            a[i] = temp;
         }
-        return array;
+        return a;
     }
 }

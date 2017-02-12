@@ -3,6 +3,7 @@ package org.tanc.algorithm.sort;
 import org.junit.Test;
 import org.tanc.algorithm.sort.impl.InsertionSort;
 import org.tanc.algorithm.sort.impl.SelectionSort;
+import org.tanc.algorithm.sort.impl.ShellSort;
 
 import static org.junit.Assert.*;
 
@@ -14,15 +15,22 @@ public class BaseSortAlgorithmTest {
 
     @Test
     public void insertionSort() throws Exception {
-        Integer[] array = {234, 352, 674, 396, 597, 103, 496, 307, 372, 623, 354, 528, 158};
+        Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
         BaseSortAlgorithm<Integer> sortAlgorithm = new InsertionSort<>();
         printArray(sortAlgorithm.sort(array));
     }
 
     @Test
     public void selectionSort() throws Exception {
-        Integer[] array = {234, 352, 674, 396, 597, 103, 496, 307, 372, 623, 354, 528, 158};
+        Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
         BaseSortAlgorithm<Integer> sortAlgorithm = new SelectionSort<>();
+        printArray(sortAlgorithm.sort(array));
+    }
+
+    @Test
+    public void shellSort() throws Exception {
+        Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
+        BaseSortAlgorithm<Integer> sortAlgorithm = new ShellSort<>();
         printArray(sortAlgorithm.sort(array));
     }
 
@@ -30,5 +38,6 @@ public class BaseSortAlgorithmTest {
         for (Object o : array) {
             System.out.print(o + ",");
         }
+        System.out.println();
     }
 }
