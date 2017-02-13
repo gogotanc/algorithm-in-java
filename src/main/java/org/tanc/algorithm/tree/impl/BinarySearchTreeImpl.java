@@ -36,6 +36,7 @@ public class BinarySearchTreeImpl<E extends Comparable<? super E>> implements Bi
 
     @Override
     public E findMin() {
+        // 使用递归实现
         return findMin(root);
     }
 

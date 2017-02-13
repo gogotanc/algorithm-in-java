@@ -51,33 +51,31 @@ public class AVLTreeImpl<E extends Comparable<? super E>> implements BinaryTree<
 
     @Override
     public E findMin() {
-        if (isEmpty()) {
+        // 使用非递归实现
+        if (null == root) {
             throw new IllegalOperationException("没有数据");
         }
-        return findMin(root);
-    }
 
-    private E findMin(Node<E> node) {
+        Node<E> temp = root;
 
-        if (null == node.left) {
-            return node.element;
+        while (temp.left != null) {
+            temp = temp.left;
         }
-        return findMin(node.left);
+        return temp.element;
     }
 
     @Override
     public E findMax() {
-        if (isEmpty()) {
+        if (null == root) {
             throw new IllegalOperationException("没有数据");
         }
-        return findMax(root);
-    }
 
-    private E findMax(Node<E> node) {
-        if (null == node.right) {
-            return node.element;
+        Node<E> temp = root;
+
+        while (temp.right != null) {
+            temp = temp.right;
         }
-        return findMax(node.right);
+        return temp.element;
     }
 
     @Override
