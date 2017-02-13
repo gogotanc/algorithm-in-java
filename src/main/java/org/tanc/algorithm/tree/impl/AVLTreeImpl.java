@@ -28,17 +28,56 @@ public class AVLTreeImpl<E extends Comparable<? super E>> implements BinaryTree<
 
     @Override
     public boolean contains(E element) {
-        return false;
+        if (isEmpty()) {
+            return false;
+        }
+        return contains(element, root);
+    }
+
+    private boolean contains(E element, Node<E> node) {
+
+        if (null == node) {
+            return false;
+        }
+        int result = element.compareTo(node.element);
+        if (result == 0) {
+            return true;
+        } else if (result < 0) {
+            return contains(element, node.left);
+        } else {
+            return contains(element, node.right);
+        }
     }
 
     @Override
     public E findMin() {
-        return null;
+        if (isEmpty()) {
+            throw new IllegalOperationException("没有数据");
+        }
+        return findMin(root);
+    }
+
+    private E findMin(Node<E> node) {
+
+        if (null == node.left) {
+            return node.element;
+        }
+        return findMin(node.left);
     }
 
     @Override
     public E findMax() {
-        return null;
+        if (isEmpty()) {
+            throw new IllegalOperationException("没有数据");
+        }
+        return findMax(root);
+    }
+
+    private E findMax(Node<E> node) {
+        if (null == node.right) {
+            return node.element;
+        }
+        return findMax(node.right);
     }
 
     @Override
@@ -67,7 +106,7 @@ public class AVLTreeImpl<E extends Comparable<? super E>> implements BinaryTree<
 
     @Override
     public void remove(E element) {
-
+        // todo remove method
     }
 
     @Override

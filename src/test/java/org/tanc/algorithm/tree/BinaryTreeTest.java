@@ -15,20 +15,18 @@ import static org.junit.Assert.assertEquals;
 public class BinaryTreeTest {
 
     @Test
-    public void test() {
-
+    public void binarySearchTree() {
         BinaryTree<Integer> tree = new BinarySearchTreeImpl<>();
-
-        Random random = new Random(46);
-        for (int i =0; i<14; i++) {
-            tree.insert(random.nextInt(100));
-        }
-        tree.printTree();
+        testCase(tree);
     }
 
     @Test
     public void AVLTree() {
         BinaryTree<Integer> tree = new AVLTreeImpl<>();
+        testCase(tree);
+    }
+
+    private void testCase(BinaryTree<Integer> tree) {
         tree.insert(3);
         tree.insert(2);
         tree.insert(1);
@@ -46,5 +44,11 @@ public class BinaryTreeTest {
         tree.insert(8);
         tree.insert(9);
         tree.printTree();
+        assertEquals(1, tree.findMin().intValue());
+        assertEquals(16, tree.findMax().intValue());
+        assertEquals(true, tree.contains(5));
+        assertEquals(false, tree.contains(18));
+        tree.makeEmpty();
+        assertEquals(true, tree.isEmpty());
     }
 }
