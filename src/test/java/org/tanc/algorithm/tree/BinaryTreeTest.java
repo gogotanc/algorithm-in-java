@@ -46,8 +46,10 @@ public class BinaryTreeTest {
         tree.printTree();
         assertEquals(1, tree.findMin().intValue());
         assertEquals(16, tree.findMax().intValue());
-        assertEquals(true, tree.contains(5));
-        assertEquals(false, tree.contains(18));
+        assertEquals(true, tree.contains(9));
+        tree.remove(9);
+        assertEquals(false, tree.contains(9));
+        tree.printTree();
         tree.makeEmpty();
         assertEquals(true, tree.isEmpty());
     }

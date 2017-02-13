@@ -1,5 +1,6 @@
 package org.tanc.algorithm.tree.impl;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.tanc.algorithm.exception.IllegalOperationException;
 import org.tanc.algorithm.tree.BinaryTree;
 
@@ -89,17 +90,47 @@ public class BinarySearchTreeImpl<E extends Comparable<? super E>> implements Bi
             } else {
                 node.left = new Node<>(element, null, null);
             }
+        } else {
+            throw new IllegalOperationException("添加重复数据");
         }
     }
 
     @Override
     public void remove(E element) {
-        // todo remove method need to being finished
+        if (isEmpty()) {
+            throw new IllegalOperationException("没有数据");
+        }
+        remove(element, root);
+    }
+
+    /**
+     * 二叉查找树 删除节点方法 P82
+     * @param element 删除的节点
+     * @param node 删除节点路径上的父辈节点
+     * @return 用于更新删除节点的父节点
+     */
+    private Node<E> remove(E element, Node<E> node) {
+        if (null == node) {
+            return null;
+        }
+        int result = element.compareTo(node.element);
+        if (result > 0) {
+            node.right = remove(element, node.right);
+        } else if (result < 0) {
+            node.left = remove(element, node.left);
+        } else if (node.left != null && node.right != null) {
+            node.element = findMin(node.right);
+            node.right = remove(node.element, node.right);
+        } else {
+            node = (node.left != null) ? node.left : node.right;
+        }
+        return node;
     }
 
     @Override
     public void printTree() {
         printTree(root);
+        System.out.println();
     }
 
     private void printTree(Node<E> root) {
