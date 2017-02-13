@@ -4,7 +4,7 @@ package org.tanc.algorithm.tree;
  * 二叉树
  * Created by tanc on 2017/2/10.
  */
-public interface BinaryTree<E> {
+public interface BinaryTree<E extends Comparable<? super E>> {
 
     void makeEmpty();
 
