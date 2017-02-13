@@ -55,8 +55,11 @@ public class AVLTreeImpl<E extends Comparable<? super E>> implements BinaryTree<
         if (null == root) {
             throw new IllegalOperationException("没有数据");
         }
+        return findMin(root);
+    }
 
-        Node<E> temp = root;
+    private E findMin(Node<E> node) {
+        Node<E> temp = node;
 
         while (temp.left != null) {
             temp = temp.left;
@@ -104,12 +107,37 @@ public class AVLTreeImpl<E extends Comparable<? super E>> implements BinaryTree<
 
     @Override
     public void remove(E element) {
-        // todo remove method
+        remove(element, root);
+    }
+
+    /**
+     * AVL 树 删除节点方法 P93
+     * @param element 删除的节点
+     * @param node 删除节点路径上的父辈节点
+     * @return 返回平衡后的父节点
+     */
+    private Node<E> remove(E element, Node<E> node) {
+        if (null == node) {
+            return null;
+        }
+        int result = element.compareTo(node.element);
+        if (result > 0) {
+            node.right = remove(element, node.right);
+        } else if (result < 0) {
+            node.left = remove(element, node.left);
+        } else if (node.left != null && node.right != null) {
+            node.element = findMin(node.right);
+            node.right = remove(node.element, node.right);
+        } else {
+            node = (node.left != null) ? node.left : node.right;
+        }
+        return balance(node);
     }
 
     @Override
     public void printTree() {
         printTree(root);
+        System.out.println();
     }
 
     private void printTree(Node<E> root) {
