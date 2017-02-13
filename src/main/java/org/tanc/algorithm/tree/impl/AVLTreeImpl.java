@@ -122,6 +122,16 @@ public class AVLTreeImpl<E extends Comparable<? super E>> implements BinaryTree<
     /**
      * 单旋转 （右旋转）
      * 详情见《数据结构与算法分析 - Java 语言描述》 P87
+     *
+     * T1, T2, T3 and T4 are subtrees.
+     *          z                                      y
+     *         / \                                   /   \
+     *        y   T4      Right Rotate (z)          x      z
+     *       / \          - - - - - - - - ->      /  \    /  \
+     *      x   T3                               T1  T2  T3  T4
+     *     / \
+     *   T1   T2
+     *
      * @param k2 旋转开始前的根结点
      * @return k1 作为新的根结点返回
      */
@@ -156,8 +166,18 @@ public class AVLTreeImpl<E extends Comparable<? super E>> implements BinaryTree<
 
     /**
      * 双旋转（先左后右） P93
-     * @param k3 初始根节点
-     * @return k3.left.right 作为根返回
+     *
+     *      z                               z                           x
+     *     / \                            /   \                        /  \
+     *    y   T4  Left Rotate (y)        x    T4  Right Rotate(z)    y      z
+     *   / \      - - - - - - - - ->    /  \      - - - - - - - ->  / \    / \
+     * T1   x                          y    T3                    T1  T2 T3  T4
+     *     / \                        / \
+     *   T2   T3                    T1   T2
+     *
+     *
+     * @param k3 初始根节点 (z)
+     * @return k3.left.right (x) 作为根返回
      */
     private Node<E> doubleWithLeftChild(Node<E> k3) {
         k3.left = rotateWithRightChild(k3.left);
