@@ -1,5 +1,6 @@
 package org.tanc.algorithm.heap.impl;
 
+import org.tanc.algorithm.exception.IllegalOperationException;
 import org.tanc.algorithm.heap.BaseHeap;
 
 /**
@@ -16,19 +17,30 @@ public class BinaryHeapArrayImpl<E extends Comparable<? super E>> implements Bas
     private E[] heap;
     private int count;
 
+    private static final int INIT_SIZE = 24;
+
     @SuppressWarnings("unchecked")
     public BinaryHeapArrayImpl() {
-        heap = (E[]) new Comparable[24];
+        heap = (E[]) new Comparable[INIT_SIZE];
         count = 0;
     }
 
     @Override
     public E deleteMin() {
 
+        if (count == 0) {
+            throw new IllegalOperationException("没有数据");
+        }
+
         E min = heap[1];
         E last = heap[count];
 
         for (int i = 1; i <= count;) {
+
+            if (i == count) {
+                heap[i] = last;
+                break;
+            }
 
             E left = heap[i * 2];
             E right = heap[i * 2 + 1];
@@ -58,6 +70,11 @@ public class BinaryHeapArrayImpl<E extends Comparable<? super E>> implements Bas
 
     @Override
     public void insert(E element) {
+
+        if ((count + 1) == heap.length) {
+            enlargeArray();
+        }
+
         int index = ++count;
         for (heap[0] = element; heap[index / 2].compareTo(element) > 0; index /= 2) {
             heap[index] = heap[index / 2];
@@ -71,5 +88,12 @@ public class BinaryHeapArrayImpl<E extends Comparable<? super E>> implements Bas
             System.out.print(heap[i] + ",");
         }
         System.out.println();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void enlargeArray() {
+        E[] temp = (E[]) new Comparable[(count + 1) * 2];
+        System.arraycopy(heap, 1, temp, 1, count);
+        heap = temp;
     }
 }

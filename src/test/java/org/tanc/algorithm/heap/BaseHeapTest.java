@@ -20,11 +20,7 @@ public class BaseHeapTest {
         heap.insert(5);
         heap.insert(1);
         heap.printHeap();
-        System.out.print(heap.deleteMin());
-        System.out.print(heap.deleteMin());
-        System.out.print(heap.deleteMin());
-        System.out.print(heap.deleteMin());
-        System.out.print(heap.deleteMin());
+        assertEquals(1, heap.deleteMin().intValue());
     }
 
 }
