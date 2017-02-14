@@ -12,6 +12,7 @@ import org.tanc.algorithm.heap.BaseHeap;
  */
 public class BinaryHeapArrayImpl<E extends Comparable<? super E>> implements BaseHeap<E> {
 
+    // 数组第一位没有使用，第一个插入元素从下标 1 开始
     private E[] heap;
     private int count;
 
@@ -28,17 +29,10 @@ public class BinaryHeapArrayImpl<E extends Comparable<? super E>> implements Bas
 
     @Override
     public void insert(E element) {
-
-        if (count == 0) {
-            heap[0] = element;
-            count++;
-            return;
-        }
-
         int index = ++count;
-        for (; (index / 2 > 0) && (heap[index / 2 - 1].compareTo(element) > 0); index /= 2) {
-            heap[index - 1] = heap[index / 2 - 1];
+        for (heap[0] = element; heap[index / 2].compareTo(element) > 0; index /= 2) {
+            heap[index] = heap[index / 2];
         }
-        heap[index - 1] = element;
+        heap[index] = element;
     }
 }
