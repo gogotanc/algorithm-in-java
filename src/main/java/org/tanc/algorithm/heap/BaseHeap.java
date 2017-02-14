@@ -9,4 +9,6 @@ public interface BaseHeap<T extends Comparable<? super T>> {
     T deleteMin();
 
     void insert(T element);
+
+    void printHeap();
 }

@@ -19,7 +19,12 @@ public class BaseHeapTest {
         heap.insert(4);
         heap.insert(5);
         heap.insert(1);
-        System.out.println();
+        heap.printHeap();
+        System.out.print(heap.deleteMin());
+        System.out.print(heap.deleteMin());
+        System.out.print(heap.deleteMin());
+        System.out.print(heap.deleteMin());
+        System.out.print(heap.deleteMin());
     }
 
 }

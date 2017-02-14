@@ -17,4 +17,9 @@ public class BinaryHeapLinkedImpl<E extends Comparable<? super E>> implements Ba
     public void insert(E element) {
 
     }
+
+    @Override
+    public void printHeap() {
+
+    }
 }

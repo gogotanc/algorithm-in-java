@@ -24,7 +24,36 @@ public class BinaryHeapArrayImpl<E extends Comparable<? super E>> implements Bas
 
     @Override
     public E deleteMin() {
-        return null;
+
+        E min = heap[1];
+        E last = heap[count];
+
+        for (int i = 1; i <= count;) {
+
+            E left = heap[i * 2];
+            E right = heap[i * 2 + 1];
+
+            if (null == left) {
+                heap[i] = last;
+                break;
+            } else if (null == right) {
+                heap[i] = heap[i * 2];
+                heap[i * 2] = last;
+                break;
+            }
+
+            int result = left.compareTo(right);
+            if (result > 0) {
+                heap[i] = heap[i * 2 + 1];
+                i = i * 2 + 1;
+            } else {
+                heap[i] = heap[i * 2];
+                i = i * 2;
+            }
+        }
+
+        heap[count--] = null;
+        return min;
     }
 
     @Override
@@ -34,5 +63,13 @@ public class BinaryHeapArrayImpl<E extends Comparable<? super E>> implements Bas
             heap[index] = heap[index / 2];
         }
         heap[index] = element;
+    }
+
+    @Override
+    public void printHeap() {
+        for (int i = 1; i <= count; i++) {
+            System.out.print(heap[i] + ",");
+        }
+        System.out.println();
     }
 }
