@@ -1,6 +1,7 @@
 package org.tanc.algorithm.sort;
 
 import org.junit.Test;
+import org.tanc.algorithm.sort.impl.HeapSort;
 import org.tanc.algorithm.sort.impl.InsertionSort;
 import org.tanc.algorithm.sort.impl.SelectionSort;
 import org.tanc.algorithm.sort.impl.ShellSort;
@@ -31,6 +32,13 @@ public class BaseSortAlgorithmTest {
     public void shellSort() throws Exception {
         Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
         BaseSortAlgorithm<Integer> sortAlgorithm = new ShellSort<>();
+        printArray(sortAlgorithm.sort(array));
+    }
+
+    @Test
+    public void heapSort() throws Exception {
+        Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
+        BaseSortAlgorithm<Integer> sortAlgorithm = new HeapSort<>();
         printArray(sortAlgorithm.sort(array));
     }
 
