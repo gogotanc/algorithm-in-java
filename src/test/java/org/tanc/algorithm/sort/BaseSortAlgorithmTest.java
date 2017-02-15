@@ -1,10 +1,7 @@
 package org.tanc.algorithm.sort;
 
 import org.junit.Test;
-import org.tanc.algorithm.sort.impl.HeapSort;
-import org.tanc.algorithm.sort.impl.InsertionSort;
-import org.tanc.algorithm.sort.impl.SelectionSort;
-import org.tanc.algorithm.sort.impl.ShellSort;
+import org.tanc.algorithm.sort.impl.*;
 
 import static org.junit.Assert.*;
 
@@ -18,30 +15,71 @@ public class BaseSortAlgorithmTest {
     public void insertionSort() throws Exception {
         Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
         BaseSortAlgorithm<Integer> sortAlgorithm = new InsertionSort<>();
-        printArray(sortAlgorithm.sort(array));
+        long start = System.nanoTime();
+        sortAlgorithm.sort(array);
+        long end = System.nanoTime();
+        printArray(array);
+        printTime(start, end);
     }
 
     @Test
     public void selectionSort() throws Exception {
         Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
         BaseSortAlgorithm<Integer> sortAlgorithm = new SelectionSort<>();
-        printArray(sortAlgorithm.sort(array));
+        long start = System.nanoTime();
+        sortAlgorithm.sort(array);
+        long end = System.nanoTime();
+        printArray(array);
+        printTime(start, end);
     }
 
     @Test
     public void shellSort() throws Exception {
         Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
         BaseSortAlgorithm<Integer> sortAlgorithm = new ShellSort<>();
-        printArray(sortAlgorithm.sort(array));
+        long start = System.nanoTime();
+        sortAlgorithm.sort(array);
+        long end = System.nanoTime();
+        printArray(array);
+        printTime(start, end);
     }
 
     @Test
     public void heapSort() throws Exception {
         Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
         BaseSortAlgorithm<Integer> sortAlgorithm = new HeapSort<>();
-        printArray(sortAlgorithm.sort(array));
+        long start = System.nanoTime();
+        sortAlgorithm.sort(array);
+        long end = System.nanoTime();
+        printArray(array);
+        printTime(start, end);
     }
 
+    @Test
+    public void mergeSort() throws Exception {
+        Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
+        BaseSortAlgorithm<Integer> sortAlgorithm = new MergeSort<>();
+        long start = System.nanoTime();
+        sortAlgorithm.sort(array);
+        long end = System.nanoTime();
+        printArray(array);
+        printTime(start, end);
+    }
+
+    /**
+     * 打印运行时间
+     * @param start 开始时间
+     * @param end 结束时间
+     */
+    private void printTime(long start, long end) {
+        long time = end - start;
+        System.out.println("运行时间为： + " + time + " ns");
+    }
+
+    /**
+     * 打印数组
+     * @param array 待打印数组
+     */
     private void printArray(Object[] array) {
         for (Object o : array) {
             System.out.print(o + ",");
