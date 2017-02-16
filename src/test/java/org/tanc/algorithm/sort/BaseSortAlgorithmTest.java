@@ -12,6 +12,18 @@ import static org.junit.Assert.*;
 public class BaseSortAlgorithmTest {
 
     @Test
+    public void bubbleSort() throws Exception {
+        Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
+        BaseSortAlgorithm<Integer> sortAlgorithm = new BubbleSort<>();
+        long start = System.nanoTime();
+        sortAlgorithm.sort(array);
+        long end = System.nanoTime();
+        printArray(array);
+        printTime(start, end);
+    }
+
+
+    @Test
     public void insertionSort() throws Exception {
         Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
         BaseSortAlgorithm<Integer> sortAlgorithm = new InsertionSort<>();
