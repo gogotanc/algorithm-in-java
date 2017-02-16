@@ -89,6 +89,16 @@ public class BaseSortAlgorithmTest {
         printTime(start, end);
     }
 
+    @Test
+    public void radixSort() throws Exception {
+        String[] list = new String[]{"g", "f", "d", "e", "w", "i", "o"};
+        long start = System.nanoTime();
+        RadixSort.sort(list, 1);
+        long end = System.nanoTime();
+        printArray(list);
+        printTime(start, end);
+    }
+
     /**
      * 打印运行时间
      * @param start 开始时间
