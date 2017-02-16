@@ -66,6 +66,17 @@ public class BaseSortAlgorithmTest {
         printTime(start, end);
     }
 
+    @Test
+    public void quickSort() throws Exception {
+        Integer[] array = {9, 3, 4, 6, 5, 8, 7, 2, 1, 0};
+        BaseSortAlgorithm<Integer> sortAlgorithm = new QuickSort<>();
+        long start = System.nanoTime();
+        sortAlgorithm.sort(array);
+        long end = System.nanoTime();
+        printArray(array);
+        printTime(start, end);
+    }
+
     /**
      * 打印运行时间
      * @param start 开始时间
