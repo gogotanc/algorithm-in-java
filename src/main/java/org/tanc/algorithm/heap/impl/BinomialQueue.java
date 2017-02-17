@@ -26,29 +26,80 @@ public class BinomialQueue<E extends Comparable<? super E>> implements BaseHeap<
 
     @Override
     public E deleteMin() {
-        E min = getMin();
+        Node<E> min = getMin();
 
         delete();
 
-        return min;
+        return min.data;
     }
 
     private void delete() {
+        int minIndex = getMinIndex();
+        Node<E> min = getMin();
+        int size = pow(2, minIndex);
+        this.roots[minIndex] = null;
+        this.size -= size;
+
+        BinomialQueue<E> queue = new BinomialQueue<>();
+        queue.size = size;
+
+        Node<E> temp = min.firstChild;
+        queue.roots[0] = temp;
+        for (int i = 1; i < minIndex; i++) {
+            Node<E> e = temp.nextSibling;
+            temp = temp.nextSibling;
+            queue.roots[i] = e;
+        }
+
+        for (Node<E> node : queue.roots) {
+            if (null != node) {
+                node.nextSibling = null;
+            }
+        }
+
+        merge(queue);
 
     }
 
-    private E getMin() {
+    private int pow(int src, int count) {
+        int result = 1;
+        for (int i = 0; i < count; i++) {
+            result *= src;
+        }
+        return result;
+    }
+
+    private int getMinIndex() {
         E min = null;
+        int index = 0;
+        for (int i = 0; i < roots.length; i++) {
+            if (null == roots[i]) {
+                continue;
+            }
+            if (null == min) {
+                min = roots[i].data;
+                continue;
+            }
+            if (min.compareTo(roots[i].data) > 0) {
+                min = roots[i].data;
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    private Node<E> getMin() {
+        Node<E> min = null;
         for (Node<E> root : roots) {
             if (null == root) {
                 continue;
             }
             if (null == min) {
-                min = root.data;
+                min = root;
                 continue;
             }
-            if (min.compareTo(root.data) > 0) {
-                min = root.data;
+            if (min.data.compareTo(root.data) > 0) {
+                min = root;
             }
         }
         return min;
@@ -80,6 +131,10 @@ public class BinomialQueue<E extends Comparable<? super E>> implements BaseHeap<
         printTree(node.firstChild);
     }
 
+    /**
+     * 合并操作
+     * @param queue 待合并的二项队列
+     */
     private void merge(BinomialQueue<E> queue) {
 
         if (this == queue) {

@@ -1,6 +1,7 @@
 package org.tanc.algorithm.heap;
 
 import org.junit.Test;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.tanc.algorithm.heap.impl.BinaryHeapArrayImpl;
 import org.tanc.algorithm.heap.impl.BinomialQueue;
 
@@ -41,7 +42,13 @@ public class BaseHeapTest {
         heap.insert(12);
         heap.insert(13);
         heap.printHeap();
+        System.out.println("-------------------------------");
         assertEquals(1, heap.deleteMin().intValue());
+        heap.printHeap();
+        System.out.println("-------------------------------");
+        assertEquals(2, heap.deleteMin().intValue());
+        heap.printHeap();
+        System.out.println("-------------------------------");
     }
 
 }
