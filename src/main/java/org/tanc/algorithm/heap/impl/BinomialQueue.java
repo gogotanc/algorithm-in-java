@@ -17,36 +17,137 @@ public class BinomialQueue<E extends Comparable<? super E>> implements BaseHeap<
         size = 0;
     }
 
+    @SuppressWarnings("unchecked")
+    private BinomialQueue(E item){
+        size = 1;
+        roots = new Node[1];
+        roots[0] = new Node<>(item, null, null);
+    }
+
     @Override
     public E deleteMin() {
-        return null;
+        E min = getMin();
+
+        delete();
+
+        return min;
+    }
+
+    private void delete() {
+
+    }
+
+    private E getMin() {
+        E min = null;
+        for (Node<E> root : roots) {
+            if (null == root) {
+                continue;
+            }
+            if (null == min) {
+                min = root.data;
+                continue;
+            }
+            if (min.compareTo(root.data) > 0) {
+                min = root.data;
+            }
+        }
+        return min;
     }
 
     @Override
     public void insert(E element) {
-        if (size == 0) {
-            roots[0] = new Node<>(element);
-        }
+        merge(new BinomialQueue<>(element));
     }
 
     @Override
     public void printHeap() {
-
+        for (int i = 0; i < roots.length; i++) {
+            if (roots[i] == null) {
+                continue;
+            }
+            System.out.println("----- B(" + i + ") -----:");
+            printTree(roots[i]);
+            System.out.println();
+        }
     }
 
-    public void merge(BinomialQueue<E> queue) {
+    private void printTree(Node<E> node) {
+        if (node == null) {
+            return;
+        }
+        System.out.print(node.data + ",");
+        printTree(node.nextSibling);
+        printTree(node.firstChild);
+    }
+
+    private void merge(BinomialQueue<E> queue) {
+
+        if (this == queue) {
+            return;
+        }
+
+        int add = queue.size;
+        this.size += add;
+
+        Node<E> temp = null;
+        Node<E> r1;
+        Node<E> r2;
+        for (int i = 0; i < roots.length; i++) {
+            r1 = roots[i];
+            r2 = i < queue.roots.length ? queue.roots[i] : null;
+
+            int a = r1 == null ? 0 : 1;
+            int b = r2 == null ? 0 : 1;
+            int c = temp == null ? 0 : 1;
+
+            int flag = a + b + c;
+
+            switch (flag) {
+                case 0:
+                    break;
+                case 1:
+                    if (a == 1) {
+                        break;
+                    } else if (b == 1) {
+                        roots[i] = r2;
+                    } else if (c == 1) {
+                        roots[i] = temp;
+                        temp = null;
+                    }
+                    break;
+                case 2:
+                    if (a == 0) {
+                        temp = combineTrees(r2, temp);
+                    } else if (b == 0) {
+                        temp = combineTrees(r1, temp);
+                    } else if (c == 0) {
+                        temp = combineTrees(r2, r1);
+                    }
+                    roots[i] = null;
+                    break;
+                case 3:
+                    temp = combineTrees(r2, temp);
+                default:
+            }
+        }
     }
 
     private Node<E> combineTrees(Node<E> r1, Node<E> r2) {
         int result = r1.data.compareTo(r2.data);
-        if (result < 0) {
-            r2.nextSibling = r1.firstChild;
-            r1.firstChild = r2;
-            return r1;
+        if (result > 0) {
+            return combineTrees(r2, r1);
         } else {
-            r1.nextSibling = r2.firstChild;
-            r2.firstChild = r1;
-            return r2;
+            Node<E> temp;
+            if (r1.firstChild != null) {
+                temp = r1.firstChild;
+                while (temp.nextSibling != null) {
+                    temp = temp.nextSibling;
+                }
+                temp.nextSibling = r2;
+            } else {
+                r1.firstChild = r2;
+            }
+            return r1;
         }
     }
 
