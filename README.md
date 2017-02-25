@@ -2,7 +2,7 @@
 
 阅读《数据结构与算法分析 - Java 语言描述》一书，写的相关示例代码。
 
-## 进度
+### progress
 
 - [x] 表、栈、队列
 
@@ -45,3 +45,7 @@
 - [ ] 第 11 章
 
 - [ ] 第 12 章
+
+### references
+
+- [java-algorithms-implementation](https://github.com/phishman3579/java-algorithms-implementation)
