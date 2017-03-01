@@ -15,16 +15,12 @@ public interface Graph {
     void addEdge(int in, int out);
 
     /**
-     * 添加赋权边
-     *
-     * @param in    起点
-     * @param out   终点
-     * @param count 权
-     */
-    void addEdge(int in, int out, int count);
-
-    /**
      * 拓扑排序
      */
     void topologicalSorting();
+
+    /**
+     * 打印输出所有节点和连接
+     */
+    void print();
 }
