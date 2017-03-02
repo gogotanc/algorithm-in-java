@@ -19,8 +19,12 @@ public class GraphTest {
         graph.addEdge(1, 2);
         graph.addEdge(2, 4);
         graph.addEdge(3, 2);
-        graph.addEdge(3, 1);
+//        graph.addEdge(3, 1);
         graph.addEdge(3, 4);
+        graph.print();
+
+        graph.topologicalSorting();
+
         graph.print();
     }
 }

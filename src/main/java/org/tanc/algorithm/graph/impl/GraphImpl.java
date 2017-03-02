@@ -15,8 +15,11 @@ public class GraphImpl implements Graph {
 
     private List<Vertex> vertexList;
 
+    private BaseQueue<Vertex> zero;
+
     public GraphImpl() {
         vertexList = new ArrayList<>();
+        zero = new LinkedQueueImpl<>();
     }
 
     @Override
@@ -37,16 +40,26 @@ public class GraphImpl implements Graph {
 
     @Override
     public void topologicalSorting() {
-        Vertex vertex = findZeroIndegreeVertex();
-        if (vertex == null) {
-            throw new IllegalOperationException("拓扑排序出错");
+
+        List<Vertex> temp = new ArrayList<>(vertexList);
+
+        while (temp.size() > 0) {
+            Vertex vertex = findZeroIndegreeVertex(temp);
+            if (vertex == null) {
+                throw new IllegalOperationException("拓扑排序出错");
+            }
+
+            zero.push(vertex);
+            temp.remove(vertex);
+
+            for (Vertex item : vertex.links) {
+                item.removeLink(item);
+            }
         }
-        BaseQueue<Vertex> zeroIndegreeVertexQueue = new LinkedQueueImpl<>();
 
-        zeroIndegreeVertexQueue.push(vertex);
-
-        for (Vertex item : vertex.links) {
-            item.removeLink(vertex);
+        while (zero.size() > 0) {
+            Vertex vertex = zero.pop();
+            System.out.println(vertex.item);
         }
     }
 
@@ -70,8 +83,8 @@ public class GraphImpl implements Graph {
         return null;
     }
 
-    private Vertex findZeroIndegreeVertex() {
-        for (Vertex vertex : vertexList) {
+    private Vertex findZeroIndegreeVertex(List<Vertex> list) {
+        for (Vertex vertex : list) {
             if (vertex.indegree == 0) {
                 return vertex;
             }
