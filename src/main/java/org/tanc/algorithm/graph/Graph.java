@@ -29,5 +29,5 @@ public interface Graph {
      *
      * @param inNum 单源节点
      */
-    void showLength(int inNum);
+    void printShortestDist(int inNum);
 }

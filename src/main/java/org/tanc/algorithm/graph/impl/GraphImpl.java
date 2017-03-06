@@ -13,6 +13,8 @@ import java.util.*;
  */
 public class GraphImpl implements Graph {
 
+    private static final int INFINITY = 10000;
+
     /* 保存所有顶点的链表 */
     private List<Vertex> vertexList;
 
@@ -39,7 +41,9 @@ public class GraphImpl implements Graph {
     @Override
     public void topologicalSorting() {
 
+        /* 保存 0 入度顶点的队列 */
         BaseQueue<Vertex> zero = new LinkedQueueImpl<>();
+        /* 复制顶点的链表 */
         List<Vertex> temp = new ArrayList<>(vertexList);
 
         while (temp.size() > 0) {
@@ -74,13 +78,43 @@ public class GraphImpl implements Graph {
     }
 
     @Override
-    public void showLength(int inNum) {
+    public void printShortestDist(int inNum) {
+
         Vertex vertex = findVertex(inNum);
 
+        BaseQueue<Vertex> queue = new LinkedQueueImpl<>();
+
+        if (null == vertex) {
+            throw new IllegalOperationException("顶点不存在");
+        }
+
+        for (Vertex v : vertexList) {
+            v.dist = INFINITY;
+        }
+
+        vertex.dist = 0;
+        queue.push(vertex);
+
+        while (queue.size() != 0) {
+
+            Vertex v = queue.pop();
+
+            System.out.println(v.number + "==>" + v.dist);
+
+            //v.links.stream().filter(w -> w.dist == INFINITY).forEach(w -> w.dist = v.dist + 1);
+
+            v.links.forEach(w -> {
+                if (w.dist == INFINITY) {
+                    w.dist = v.dist + 1;
+                    queue.push(w);
+                }
+            });
+        }
     }
 
     /**
      * 查找节点
+     *
      * @param number 节点的序号
      * @return 找到的节点
      */
@@ -95,6 +129,7 @@ public class GraphImpl implements Graph {
 
     /**
      * 查找 0 入度的节点
+     *
      * @param list 节点列表
      * @return 返回首先找到的 0 入度的节点
      */
@@ -111,12 +146,19 @@ public class GraphImpl implements Graph {
      * 图顶点数据结构
      */
     private class Vertex {
+
         /* 节点的序号 */
         int number;
+
         /* 节点的入度 */
         int inDegree;
+
         /* 距源节点的距离 */
         int dist;
+
+        /* 距离源节点的路径长 */
+        int path;
+
         /* 节点的链接点 */
         List<Vertex> links;
 
@@ -126,11 +168,21 @@ public class GraphImpl implements Graph {
             this.number = number;
         }
 
+        /**
+         * 添加链接顶点
+         *
+         * @param vertex 给顶点添加链接的顶点
+         */
         void addLink(Vertex vertex) {
             vertex.inDegree++;
             links.add(vertex);
         }
 
+        /**
+         * 删除链接顶点
+         *
+         * @param vertex 要删除的顶点
+         */
         void removeLink(Vertex vertex) {
             vertex.inDegree--;
             links.remove(vertex);
