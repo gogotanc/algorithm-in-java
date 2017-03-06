@@ -13,18 +13,17 @@ public class GraphTest {
 
     @Test
     public void test() throws Exception {
+
         Graph graph = new GraphImpl();
 
         graph.addEdge(1, 3);
         graph.addEdge(1, 2);
         graph.addEdge(2, 4);
         graph.addEdge(3, 2);
-//        graph.addEdge(3, 1);
         graph.addEdge(3, 4);
+
         graph.print();
 
         graph.topologicalSorting();
-
-        graph.print();
     }
 }
