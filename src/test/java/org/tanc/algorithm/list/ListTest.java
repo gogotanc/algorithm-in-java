@@ -58,12 +58,15 @@ public class ListTest {
         list.add(1);
         list.add(2);
         list.add(3);
-        list.remove(1);
-        list.remove(1);
+        // 0 1 2 3
+        list.remove(0);
+        list.remove(2);
+        // 1 2
         assertEquals(2, list.size());
-        assertEquals(0, list.get(1).intValue());
+        assertEquals(2, list.get(1).intValue());
         list.set(1, 1);
         list.set(1, 2);
-        assertEquals(1, list.get(2).intValue());
+        // 1 2
+        assertEquals(2, list.get(1).intValue());
     }
 }
