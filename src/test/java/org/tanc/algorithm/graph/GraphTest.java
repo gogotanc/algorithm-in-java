@@ -14,7 +14,7 @@ public class GraphTest {
     @Test
     public void topologicalSort() throws Exception {
 
-        Graph graph = new GraphImpl();
+        GraphImpl graph = new GraphImpl();
 
         graph.addEdge(1, 3);
         graph.addEdge(1, 2);
@@ -29,7 +29,7 @@ public class GraphTest {
 
     @Test
     public void shortestDist() throws Exception {
-        Graph graph = new GraphImpl();
+        GraphImpl graph = new GraphImpl();
 
         graph.addEdge(1, 3);
         graph.addEdge(1, 2);

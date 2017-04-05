@@ -1,7 +1,6 @@
 package org.tanc.algorithm.graph.impl;
 
 import org.tanc.algorithm.exception.IllegalOperationException;
-import org.tanc.algorithm.graph.Graph;
 import org.tanc.algorithm.queue.BaseQueue;
 import org.tanc.algorithm.queue.impl.LinkedQueueImpl;
 
@@ -11,7 +10,7 @@ import java.util.*;
  * 有向图
  * Created by tanc on 2017/3/1.
  */
-public class GraphImpl implements Graph {
+public class GraphImpl {
 
     private static final int INFINITY = 10000;
 
@@ -22,7 +21,9 @@ public class GraphImpl implements Graph {
         vertexList = new ArrayList<>();
     }
 
-    @Override
+    /**
+     * 添加边
+     */
     public void addEdge(int inNum, int outNum) {
         Vertex begin = findVertex(inNum);
         Vertex end = findVertex(outNum);
@@ -38,7 +39,9 @@ public class GraphImpl implements Graph {
         begin.addLink(end);
     }
 
-    @Override
+    /**
+     * 拓扑排序
+     */
     public void topologicalSorting() {
 
         /* 保存 0 入度顶点的队列 */
@@ -66,7 +69,6 @@ public class GraphImpl implements Graph {
         }
     }
 
-    @Override
     public void print() {
         for (Vertex vertex : vertexList) {
             System.out.print(vertex.number + " ==>");
@@ -77,7 +79,11 @@ public class GraphImpl implements Graph {
         }
     }
 
-    @Override
+    /**
+     * 打印无权图最短路径
+     *
+     * @param inNum 单源节点
+     */
     public void printShortestDist(int inNum) {
 
         Vertex vertex = findVertex(inNum);
