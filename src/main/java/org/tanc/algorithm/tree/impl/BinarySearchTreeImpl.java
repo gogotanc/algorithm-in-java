@@ -1,6 +1,5 @@
 package org.tanc.algorithm.tree.impl;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.tanc.algorithm.exception.IllegalOperationException;
 import org.tanc.algorithm.tree.BinaryTree;
 
