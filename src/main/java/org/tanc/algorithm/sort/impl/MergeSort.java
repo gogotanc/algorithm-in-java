@@ -57,6 +57,7 @@ public class MergeSort<E extends Comparable<? super E>> implements BaseSortAlgor
             result[p++] = src[rightPos++];
         }
 
+        // 将 merge 结果复制到源数组中
         for (int i = 0; i < count; i++, rightEnd--) {
             src[rightEnd] = result[rightEnd];
         }
